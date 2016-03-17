@@ -223,7 +223,7 @@ public class TrapHandler {
 				player.setBanned(true);
 				banned = true;
 			}
-            if(fd.getConfig().getBoolean(Config.ExecutecommandOnTrapBreak)){
+            if(fd.getConfig().getBoolean(Config.executeCommandOnTrapBreak)){
                 String commandString = fd.getConfig().getString(Config.commandOnTrapBreak).replaceAll("//@player@",player.getName());
                 Bukkit.getServer().dispatchCommand(player, commandString);
                 command = true;
