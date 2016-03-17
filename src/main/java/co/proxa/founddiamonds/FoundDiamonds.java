@@ -104,7 +104,7 @@ public class FoundDiamonds extends JavaPlugin {
         pm.registerEvents(blockBreakListener, this);
         pm.registerEvents(blockPlaceListener, this);
         pm.registerEvents(pistonListener, this);
-        pm.registerEvents(trapListener, this);
+        //pm.registerEvents(trapListener, this);
         pm.registerEvents(lightLevelListener, this);
     }
 

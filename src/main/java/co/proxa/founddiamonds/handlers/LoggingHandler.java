@@ -1,5 +1,6 @@
 package co.proxa.founddiamonds.handlers;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -29,8 +30,13 @@ public class LoggingHandler {
             PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fd.getFileHandler().getLogFile(), true)));
             pw.print("[" + getFormattedDate() + "]");
             if (trapBlock) {
+                Bukkit.getServer().getLogger().info("[DEBUG] Trap block detected!");
+
                 pw.print(" [TRAP BLOCK]");
             }
+            Bukkit.getServer().getLogger().info("[DEBUG]" + " " + block.getType().name().toLowerCase().replace("_", " ") + " broken by "
+              + player.getName() + " at (x: " + block.getX() + ", y: " + block.getY() + ", z: " + block.getZ()
+              + ") in " + player.getWorld().getName());
             pw.println(" " + block.getType().name().toLowerCase().replace("_", " ") + " broken by "
                     + player.getName() + " at (x: " + block.getX() + ", y: " + block.getY() + ", z: " + block.getZ()
                     + ") in " + player.getWorld().getName());

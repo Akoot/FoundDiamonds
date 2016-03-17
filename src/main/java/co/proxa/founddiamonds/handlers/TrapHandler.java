@@ -24,7 +24,7 @@ public class TrapHandler {
 
 	private FoundDiamonds fd;
     private static ArrayList<Trap> trapList = new ArrayList<Trap>(); // map linking traps to locations, the middle of the trap
-    private static Map<Block,Trap> inverseList = new HashMap<Block,Trap>(); // map linking locations to traps
+    private static Map<Location,Trap> inverseList = new HashMap<Location,Trap>(); // map linking trap to location in list.
 
 	public TrapHandler(FoundDiamonds fd) {
 		this.fd = fd;
@@ -121,7 +121,8 @@ public class TrapHandler {
                 player.sendMessage(Prefix.getMenuPrefix() + ChatColor.WHITE + "Trap ID [" + ChatColor.YELLOW
                         + trapList.size() + ChatColor.WHITE + "] set with " + BlockColor.getBlockColor(trapMaterial)
                         + Format.capitalize(Format.getFormattedName(trapMaterial, 1)) + ChatColor.WHITE + getFormattedDepthString(depth));
-                trapList.add(newTrap);
+                //trapList.add(newTrap);
+                inverseList.put(newTrap.getLocation(), newTrap);
             } else {
                 player.sendMessage(Prefix.getChatPrefix() + ChatColor.RED + " Unable to place a trap here");
                 player.sendMessage(Prefix.getChatPrefix() + ChatColor.RED + " There's another one in the way!");
@@ -185,15 +186,20 @@ public class TrapHandler {
 	}
 
 	public boolean isTrapBlock(Location loc) {
-		return inverseList.containsKey(loc.getBlock());
+		return inverseList.containsKey(loc);
 	}
 
 	public void handleTrapBlockBreak(BlockBreakEvent event) {
 		event.setCancelled(true);
 		Player player = event.getPlayer();
 		Block block = event.getBlock();
-		Trap trap = inverseList.get(block);
-		if (fd.getPermissions().hasPerm(player, "fd.trap")) {
+        if(!isTrapBlock(block.getLocation())){
+            Bukkit.getLogger().info("[Debug] Not a Trap.");
+            return;
+        }
+
+		Trap trap = inverseList.get(block.getLocation());
+        if (fd.getPermissions().hasPerm(player, "fd.trap")) {
 			//player.sendMessage(ChatColor.AQUA + "Trap block removed");
             sendTrapRemovedMessage(player, trap);
             //trap.removeTrap();
@@ -319,7 +325,7 @@ public class TrapHandler {
         return trapList;
     }
 
-    public static Map<Block, Trap> getInverseList() {
+    public static Map<Location, Trap> getInverseList() {
         return inverseList;
     }
 

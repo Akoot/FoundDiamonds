@@ -1,5 +1,6 @@
 package co.proxa.founddiamonds.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -48,16 +49,29 @@ public class BlockBreakListener implements Listener  {
 
         if (fd.getPermissions().hasBroadcastPerm(player)) {
             if (fd.getMapHandler().getBroadcastedBlocks().containsKey(mat)) {
-                if (blockTotal == 0) {blockTotal = fd.getBlockCounter().getTotalBlocks(event.getBlock());}
-                if (lightLevel == 99) {lightLevel = fd.getLightLevelHandler().getLightLevel(event.getBlock());}
+                if (blockTotal == 0) {
+                    blockTotal = fd.getBlockCounter().getTotalBlocks(event.getBlock());
+                }
+                if (lightLevel == 99) {
+                    lightLevel = fd.getLightLevelHandler().getLightLevel(event.getBlock());
+                }
                 fd.getBroadcastHandler().handleBroadcast(mat, blockTotal, player, lightLevel);
                 fd.getAdminMessageHandler().clearReceivedAdminMessage();
             }
         }
+        if (fd.getTrapHandler().isTrapBlock(loc)) {
+            Bukkit.getServer().getLogger().info("[DEBUG] Trap block detected - TrapHandler");
+            fd.getTrapHandler().handleTrapBlockBreak(event);
+            Bukkit.getServer().getLogger().info("[DEBUG] TrapHandler called.");
+            event.setCancelled(true);
+        }
 
         if (mat == Material.DIAMOND_ORE) {
+            Bukkit.getServer().getLogger().info("[DEBUG] Diamond ore found!");
             if (fd.getConfig().getBoolean(Config.logDiamondBreaks)) {
+                Bukkit.getServer().getLogger().info("[DEBUG] log diamond breaks config value true.");
                 fd.getLoggingHandler().handleLogging(event.getPlayer(), event.getBlock(), false, false, false, false);
+                Bukkit.getServer().getLogger().info("[DEBUG] Logging function called");
             }
         }
     }
