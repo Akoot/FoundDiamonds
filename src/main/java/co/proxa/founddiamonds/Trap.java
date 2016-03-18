@@ -1,11 +1,16 @@
 package co.proxa.founddiamonds;
 
+import co.proxa.founddiamonds.handlers.TrapHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class Trap {
 
@@ -17,7 +22,7 @@ public class Trap {
 	private final Location location; // the 'middle' of the trap
 	private final Date time; // the date the trap was added;
 	private boolean persistent; // will the trap persist when broken
-
+	private List<Block> vein;
 
 
 	public Trap(byte type, Material mat, String player, Location location, boolean persistent) {
@@ -27,6 +32,7 @@ public class Trap {
 		this.location = location;
 		this.time = new Date(System.currentTimeMillis());
 		this.persistent = persistent;
+		this.vein = new ArrayList<Block>();
 	}
 
 	public Trap(byte type, Material mat, Material[] oldMat, String player, Location loc, long time, boolean persistent) {
@@ -39,6 +45,7 @@ public class Trap {
 		this.persistent = persistent;
 		//trapList.add(this);
 		this.refillInverse();
+		this.vein = new ArrayList<Block>();
 	}
 
     public String getPlacer() {
@@ -66,30 +73,33 @@ public class Trap {
 
 	public boolean createBlocks() {
 		Block[] locations = this.returnLocations(this.location.getWorld());
+        this.vein = Arrays.asList(locations);
 		oldMat = new Material[locations.length];
-        for (Block block : locations) {
+            for (Block block : this.vein) {
             //if (inverseList.containsKey(block)) {
                 //return false;
-            //}
-        }
+                Bukkit.getServer().broadcastMessage("Trap ID: " + this.getID()+" Locations:" + block.getLocation().toString() + " Vein size: "+vein.size());
+            }
+        //}
 		if (this.mat == Material.EMERALD_ORE) {
 			oldMat[0] = this.location.getBlock().getType();
 			//inverseList.put(location.getBlock(), this);
 			location.getBlock().setType(mat);
 		} else {
-			oldMat[0] = locations[0].getType();
-			oldMat[1] = locations[1].getType();
-			oldMat[2] = locations[2].getType();
-			oldMat[3] = locations[3].getType();
-			//inverseList.put(locations[0], this);
-			//inverseList.put(locations[1], this);
-			//inverseList.put(locations[2], this);
-			//inverseList.put(locations[3], this);
-			locations[0].setType(mat);
-			locations[1].setType(mat);
-			locations[2].setType(mat);
-			locations[3].setType(mat);
-		}
+            oldMat[0] = locations[0].getType();
+            oldMat[1] = locations[1].getType();
+            oldMat[2] = locations[2].getType();
+            oldMat[3] = locations[3].getType();
+            //inverseList.put(locations[0], this);
+            //inverseList.put(locations[1], this);
+            //inverseList.put(locations[2], this);
+            //inverseList.put(locations[3], this);
+            locations[0].setType(mat);
+            locations[1].setType(mat);
+            locations[2].setType(mat);
+            locations[3].setType(mat);
+        }
+
 		return true;
 	}
 
@@ -128,8 +138,8 @@ public class Trap {
 	}
 
     public int getID() {
-        //return TrapHandler.getTrapList().indexOf(this);
-        return 1; //FIXME bogus
+        return TrapHandler.getTrapList().size();
+        //return TrapHandler.getInverseList().values().size(); //FIXME bogus
     }
 
 	public String getTrapSummary() { // method to summarize the trap object, for saving
@@ -142,4 +152,7 @@ public class Trap {
 				.getBlockZ() + ";" + this.location.getWorld().getName() + ";" + this.time
 				.getTime()   + ";" + this.persistent;
 	}
+    public List<Block> getTrapVein(){
+        return vein;
+    }
 }

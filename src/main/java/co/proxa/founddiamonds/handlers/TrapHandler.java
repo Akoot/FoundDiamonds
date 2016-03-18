@@ -24,7 +24,7 @@ public class TrapHandler {
 
 	private FoundDiamonds fd;
     private static ArrayList<Trap> trapList = new ArrayList<Trap>(); // map linking traps to locations, the middle of the trap
-    private static Map<Location,Trap> inverseList = new HashMap<Location,Trap>(); // map linking trap to location in list.
+    private static Map<Block,Trap> inverseList = new HashMap<Block,Trap>(); // map linking trap to location in list.
 
 	public TrapHandler(FoundDiamonds fd) {
 		this.fd = fd;
@@ -118,11 +118,13 @@ public class TrapHandler {
             if (!isValidHeight(player, trapLoc)) { return; }
             Trap newTrap = new Trap(getTrapType(trapMaterial), trapMaterial, player.getName(), trapLoc, persistent);
             if (newTrap.createBlocks()) {
+                trapList.add(newTrap);
+                for(Block vein : newTrap.getTrapVein()) {
+                    inverseList.put(vein, newTrap);
+                }
                 player.sendMessage(Prefix.getMenuPrefix() + ChatColor.WHITE + "Trap ID [" + ChatColor.YELLOW
-                        + trapList.size() + ChatColor.WHITE + "] set with " + BlockColor.getBlockColor(trapMaterial)
-                        + Format.capitalize(Format.getFormattedName(trapMaterial, 1)) + ChatColor.WHITE + getFormattedDepthString(depth));
-                //trapList.add(newTrap);
-                inverseList.put(newTrap.getLocation(), newTrap);
+                  + newTrap.getID() + ChatColor.WHITE + "] set with " + BlockColor.getBlockColor(trapMaterial)
+                  + Format.capitalize(Format.getFormattedName(trapMaterial, 1)) + ChatColor.WHITE + getFormattedDepthString(depth));
             } else {
                 player.sendMessage(Prefix.getChatPrefix() + ChatColor.RED + " Unable to place a trap here");
                 player.sendMessage(Prefix.getChatPrefix() + ChatColor.RED + " There's another one in the way!");
@@ -186,7 +188,7 @@ public class TrapHandler {
 	}
 
 	public boolean isTrapBlock(Location loc) {
-		return inverseList.containsKey(loc);
+		return inverseList.containsKey(loc.getBlock());
 	}
 
 	public void handleTrapBlockBreak(BlockBreakEvent event) {
@@ -321,11 +323,11 @@ public class TrapHandler {
                 + ChatColor.YELLOW + trapList.indexOf(trap) + ChatColor.WHITE + "]" + ChatColor.GREEN +" removed successfully");
     }
 
-    public ArrayList<Trap> getTrapList() {
+    public static ArrayList<Trap> getTrapList() {
         return trapList;
     }
 
-    public static Map<Location, Trap> getInverseList() {
+    public static Map<Block, Trap> getInverseList() {
         return inverseList;
     }
 
