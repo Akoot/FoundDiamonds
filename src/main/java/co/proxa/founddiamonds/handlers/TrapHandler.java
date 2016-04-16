@@ -25,6 +25,7 @@ public class TrapHandler {
 	private FoundDiamonds fd;
     private static ArrayList<Trap> trapList = new ArrayList<Trap>(); // map linking traps to locations, the middle of the trap
     private static Map<Block,Trap> inverseList = new HashMap<Block,Trap>(); // map linking trap to location in list.
+    //Might be worthwhile to save the vein and the trap, essentially does the same thing might just be more organised.
 
 	public TrapHandler(FoundDiamonds fd) {
 		this.fd = fd;
@@ -227,6 +228,10 @@ public class TrapHandler {
 				player.kickPlayer(kickMessage);
 				kicked = true;
 			}
+            /*Deprecated. Use BanList.addBan(String, String, Date, String) or BanList.pardon(String) to enhance functionality
+              Bans or unbans this player
+
+              */
 			if (fd.getConfig().getBoolean(Config.banOnTrapBreak)) {
 				player.setBanned(true);
 				banned = true;

@@ -115,7 +115,8 @@ public class CommandHandler implements CommandExecutor {
                 	* to remove them as well
                 	*/
                     if (fd.getPermissions().hasTrapPerm(sender)) {
-                        fd.getMenuHandler().handleTrapMenu(fd, sender, args);
+                        sender.sendMessage(ChatColor.RED+"Traps are still being worked on. It is best if you don't use traps at this moment.");
+                        //fd.getMenuHandler().handleTrapMenu(fd, sender, args);
                     } else {
                         fd.getPermissions().sendPermissionsMessage(sender);
                     }
