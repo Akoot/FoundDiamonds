@@ -1,6 +1,6 @@
 package co.proxa.founddiamonds.util;
 
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 
 public class BlockColor {

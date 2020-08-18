@@ -1,12 +1,12 @@
 package co.proxa.founddiamonds.handlers;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import co.proxa.founddiamonds.FoundDiamonds;
 import co.proxa.founddiamonds.file.Config;
 import co.proxa.founddiamonds.util.Format;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class ItemHandler {
 

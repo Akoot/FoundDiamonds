@@ -1,9 +1,9 @@
 package co.proxa.founddiamonds;
 
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
 import co.proxa.founddiamonds.file.Config;
 import co.proxa.founddiamonds.util.Prefix;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.command.CommandSender;
 
 public class Permissions {
 

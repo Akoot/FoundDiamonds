@@ -1,11 +1,11 @@
 package co.proxa.founddiamonds.file;
 
-import org.bukkit.ChatColor;
+import co.proxa.founddiamonds.FoundDiamonds;
+import co.proxa.founddiamonds.Trap;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
-import co.proxa.founddiamonds.FoundDiamonds;
-import co.proxa.founddiamonds.Trap;
 
 import java.io.*;
 import java.text.MessageFormat;

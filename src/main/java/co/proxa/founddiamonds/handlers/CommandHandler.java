@@ -1,12 +1,12 @@
 package co.proxa.founddiamonds.handlers;
 
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import co.proxa.founddiamonds.FoundDiamonds;
 import co.proxa.founddiamonds.file.Config;
 import co.proxa.founddiamonds.util.Prefix;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 
 import java.io.IOException;
 

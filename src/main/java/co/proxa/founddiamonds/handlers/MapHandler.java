@@ -1,14 +1,14 @@
 package co.proxa.founddiamonds.handlers;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.command.CommandSender;
 import co.proxa.founddiamonds.FoundDiamonds;
 import co.proxa.founddiamonds.file.Config;
 import co.proxa.founddiamonds.util.BlockColor;
 import co.proxa.founddiamonds.util.Format;
 import co.proxa.founddiamonds.util.PluginUtils;
 import co.proxa.founddiamonds.util.Prefix;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 
 import java.util.*;
 
@@ -38,7 +38,7 @@ public class MapHandler {
         writeMapToConfig(list, configLoc);
     }
 
-    public void loadBlocksFromConfig(HashMap<Material,ChatColor> map, String configLoc) {
+    public void loadBlocksFromConfig(HashMap<Material, ChatColor> map, String configLoc) {
         if (fd.getConfig().getList(configLoc) == null) {
             createList(map, configLoc);
         } else {
@@ -86,7 +86,7 @@ public class MapHandler {
         String parsedColor = co.replace(" ","_").toUpperCase();
         ChatColor color;
         try {
-            color = ChatColor.valueOf(parsedColor);
+            color = ChatColor.of(parsedColor);
         } catch (IllegalArgumentException ex) {
             color = BlockColor.getBlockColor(mat);
             fd.getLog().info("No such color '" + parsedColor + "'.  Using default.");

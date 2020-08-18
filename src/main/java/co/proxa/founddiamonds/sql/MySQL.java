@@ -1,10 +1,10 @@
 package co.proxa.founddiamonds.sql;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
 import co.proxa.founddiamonds.FoundDiamonds;
 import co.proxa.founddiamonds.file.Config;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
 
 import java.sql.*;
 

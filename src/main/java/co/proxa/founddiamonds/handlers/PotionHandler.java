@@ -1,11 +1,11 @@
 package co.proxa.founddiamonds.handlers;
 
-import org.bukkit.ChatColor;
+import co.proxa.founddiamonds.FoundDiamonds;
+import co.proxa.founddiamonds.file.Config;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import co.proxa.founddiamonds.FoundDiamonds;
-import co.proxa.founddiamonds.file.Config;
 
 import java.util.ArrayList;
 import java.util.HashMap;

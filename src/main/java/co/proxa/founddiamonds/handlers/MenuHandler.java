@@ -1,13 +1,13 @@
 package co.proxa.founddiamonds.handlers;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import co.proxa.founddiamonds.FoundDiamonds;
 import co.proxa.founddiamonds.file.Config;
 import co.proxa.founddiamonds.util.Format;
 import co.proxa.founddiamonds.util.Prefix;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class MenuHandler {
 

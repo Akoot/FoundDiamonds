@@ -1,7 +1,7 @@
 package co.proxa.founddiamonds.util;
 
+import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang3.text.WordUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
 public class Format {
