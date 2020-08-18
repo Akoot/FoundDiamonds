@@ -4,3 +4,7 @@
 out/*
 .gradle/
 build/*
+server/*
+gradlew.*
+gradlew
+gradle/*
