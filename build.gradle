@@ -3,7 +3,7 @@ plugins {
   id 'idea'
 }
 
-version = '3.6.6'
+version = '3.6.7-alpha'
 jar {
     destinationDir file('server/plugins')
     manifest {

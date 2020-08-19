@@ -1,5 +1,5 @@
 name: FoundDiamonds
-version: 3.6.6
+version: 3.6.7-alpha
 main: co.proxa.founddiamonds.FoundDiamonds
 authors: [proxa, Akoot_]
 website: https://github.com/Akoot/FoundDiamonds
