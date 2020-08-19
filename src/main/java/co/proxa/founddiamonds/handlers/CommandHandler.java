@@ -78,7 +78,10 @@ public class CommandHandler implements CommandExecutor {
                } else if (arg.equalsIgnoreCase("reload") || arg.equalsIgnoreCase("r")) {
                     if (fd.getPermissions().hasReloadPerm(sender)) {
                         fd.reloadConfig();
-                        fd.saveConfig();
+//                        fd.saveConfig();
+                        fd.getMapHandler().loadAllBlocks();
+//                        fd.getBlockCounter().getCounted().clear(); // uncomment to test
+                        System.out.println(fd.getMapHandler().getBroadcastedBlocks());
                         sender.sendMessage(Prefix.getChatPrefix() + ChatColor.AQUA + " Configuration saved and reloaded.");
                     } else {
                         fd.getPermissions().sendPermissionsMessage(sender);

@@ -1,11 +1,10 @@
 package co.proxa.founddiamonds;
 
+import co.proxa.founddiamonds.file.Config;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import co.proxa.founddiamonds.file.Config;
-import co.proxa.founddiamonds.util.PluginUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +18,11 @@ public class BlockCounter {
             BlockFace.UP};
     private final BlockFace[] upperFaces = {BlockFace.EAST, BlockFace.WEST, BlockFace.SOUTH, BlockFace.NORTH,
             BlockFace.SOUTH_EAST, BlockFace.SOUTH_WEST, BlockFace.NORTH_EAST, BlockFace.NORTH_WEST, BlockFace.UP};
+
+    public HashSet<Location> getCounted() {
+        return counted;
+    }
+
     private final BlockFace[] LowerFaces = {BlockFace.EAST, BlockFace.WEST, BlockFace.SOUTH, BlockFace.NORTH,
             BlockFace.SOUTH_EAST, BlockFace.SOUTH_WEST, BlockFace.NORTH_EAST, BlockFace.NORTH_WEST, BlockFace.DOWN};
 

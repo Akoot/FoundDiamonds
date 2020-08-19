@@ -15,15 +15,18 @@ import java.util.*;
 public class MapHandler {
 
     private FoundDiamonds fd;
-    private HashMap<Material,ChatColor> broadcastedBlocks = new HashMap<Material,ChatColor>();
-    private HashMap<Material,ChatColor> adminMessageBlocks = new HashMap<Material,ChatColor>();
-    private HashMap<Material,ChatColor> lightLevelBlocks = new HashMap<Material,ChatColor>();
+    private HashMap<Material, ChatColor> broadcastedBlocks;
+    private HashMap<Material, ChatColor> adminMessageBlocks;
+    private HashMap<Material, ChatColor> lightLevelBlocks;
 
     public MapHandler(FoundDiamonds fd) {
         this.fd = fd;
     }
 
     public void loadAllBlocks() {
+        broadcastedBlocks = new HashMap<>();
+        adminMessageBlocks = new HashMap<>();
+        lightLevelBlocks = new HashMap<>();
         loadBlocksFromConfig(broadcastedBlocks, Config.broadcastedBlocks);
         loadBlocksFromConfig(adminMessageBlocks, Config.adminMessageBlocks);
         loadBlocksFromConfig(lightLevelBlocks, Config.lightLevelBlocks);
@@ -39,6 +42,7 @@ public class MapHandler {
     }
 
     public void loadBlocksFromConfig(HashMap<Material, ChatColor> map, String configLoc) {
+        System.out.println("Reloading colors");
         if (fd.getConfig().getList(configLoc) == null) {
             createList(map, configLoc);
         } else {
@@ -48,7 +52,7 @@ public class MapHandler {
                 Material mat = parseMaterial(sp[0]);
                 if (mat != null && mat.isBlock()) {
                     try {
-                        ChatColor color = parseColor(sp[1], mat);
+                        ChatColor color = ChatColor.of(sp[1]);
                         if (!map.containsKey(mat)) {
                             map.put(mat, color);
                         }
@@ -67,7 +71,7 @@ public class MapHandler {
                         if (mat != null && mat.isBlock()) {
                             fd.getLog().warning("Your configuration is outdated and using the old style of separating blocks and colors with a colon here: " + s[0]);
                             fd.getLog().warning("Please update these to be commas as support for the old style will be dropped.");
-                            ChatColor color = parseColor(s[1], mat2);
+                            ChatColor color = ChatColor.of(s[1]);
                             if (!map.containsKey(mat)) {
                                 map.put(mat, color);
                             }
@@ -87,6 +91,7 @@ public class MapHandler {
         ChatColor color;
         try {
             color = ChatColor.of(parsedColor);
+            fd.getLog().info("Accepted color: " + parsedColor);
         } catch (IllegalArgumentException ex) {
             color = BlockColor.getBlockColor(mat);
             fd.getLog().info("No such color '" + parsedColor + "'.  Using default.");
@@ -97,7 +102,7 @@ public class MapHandler {
     private Material parseMaterial(String is) {
         Material mat;
         try {
-            mat = Material.getMaterial(is.toUpperCase().replace(" ", "_"));
+            mat = Material.valueOf(is.toUpperCase().replace(" ", "_"));
             System.out.println("got material: " + mat.name());
             return mat;
         } catch (Exception ex) {

@@ -1,16 +1,17 @@
 name: FoundDiamonds
 version: 3.6.6
 main: co.proxa.founddiamonds.FoundDiamonds
-author: proxa
-website: http://dev.bukkit.org/server-mods/founddiamonds/
+authors: [proxa, Akoot_]
+website: https://github.com/Akoot/FoundDiamonds
 description: Block announcer and anti x-ray
-dev-url: http://dev.bukkit.org/server-mods/founddiamonds/
+dev-url: https://github.com/Akoot/FoundDiamonds
+api-version: '1.16'
 
 commands:
-   fd:
-     description: Shows the main menu
-     aliases: [founddiamonds]
-     permission-message: Sorry, you do not have permission
+  fd:
+    description: Shows the main menu
+    aliases: [founddiamonds]
+    permission-message: Sorry, you do not have permission
 
 permissions:
   fd.*:
@@ -18,7 +19,6 @@ permissions:
     default: false
     children:
       fd.trap: true
-      fd.admin: true
       fd.manage.*: true
       fd.broadcast: true
       fd.monitor: true
